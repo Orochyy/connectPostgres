@@ -5,14 +5,11 @@ import (
 	"fmt"
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
+	"os"
 )
 
 const (
-	host     = "localhost"
-	port     = 5432
-	user     = "uraaruta"
-	password = "6193"
-	dbname   = "pggolang"
+	port = 5432
 )
 
 func main() {
@@ -21,6 +18,15 @@ func main() {
 	if errEnv != nil {
 		panic("Failed to load env file")
 	}
+
+	var (
+		host     = os.Getenv("HOST")
+		user     = os.Getenv("USER")
+		password = os.Getenv("PASS")
+		dbname   = os.Getenv("DBNAME")
+	)
+
+	fmt.Println(host)
 
 	psqlconn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)
 
