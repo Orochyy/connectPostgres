@@ -3,3 +3,48 @@ CREATE TABLE students (
  name VARCHAR ( 50 )  NOT NULL,
  roll INT NOT NULL
 );
+
+CREATE TABLE product (
+                         id INT GENERATED ALWAYS AS IDENTITY,
+                         maker VARCHAR(10) ,
+                         model VARCHAR ( 50 )  NOT NULL PRIMARY KEY,
+                         type VARCHAR ( 50 ) NOT NULL
+);
+
+CREATE TABLE laptop (
+                        code INT  PRIMARY KEY,
+                        model VARCHAR ( 50 )  NOT NULL,
+                        speed smallint NOT NULL,
+                        ram smallint NOT NULL,
+                        hd real  NOT NULL,
+                        price money   NULL,
+                        screen bigint NOT NULL,
+                        CONSTRAINT fk_product
+                            FOREIGN KEY(model)
+                                REFERENCES product(model)
+);
+
+CREATE TABLE pc (
+                    code INT  PRIMARY KEY,
+                    model VARCHAR ( 50 )  NOT NULL,
+                    speed smallint NOT NULL,
+                    ram smallint NOT NULL,
+                    hd real  NOT NULL,
+                    cd VARCHAR (10) NOT NULL,
+                    price money  NULL,
+                    CONSTRAINT fk_product
+                        FOREIGN KEY(model)
+                            REFERENCES product(model)
+);
+
+CREATE TABLE printer (
+                         code INT  PRIMARY KEY,
+                         model VARCHAR ( 50 )  NOT NULL,
+                         color char(1) NOT NULL,
+                         type VARCHAR (10) NOT NULL,
+                         price money  NULL,
+                         CONSTRAINT fk_product
+                             FOREIGN KEY(model)
+                                 REFERENCES product(model)
+);
+
