@@ -5,14 +5,14 @@ CREATE TABLE students (
 );
 
 CREATE TABLE product (
-                         id INT GENERATED ALWAYS AS IDENTITY,
+                         id serial GENERATED ALWAYS AS IDENTITY,
                          maker VARCHAR(10) ,
                          model VARCHAR ( 50 )  NOT NULL PRIMARY KEY,
                          type VARCHAR ( 50 ) NOT NULL
 );
 
 CREATE TABLE laptop (
-                        code INT  PRIMARY KEY,
+                        code serial  PRIMARY KEY,
                         model VARCHAR ( 50 )  NOT NULL,
                         speed smallint NOT NULL,
                         ram smallint NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE laptop (
 );
 
 CREATE TABLE pc (
-                    code INT  PRIMARY KEY,
+                    code serial  PRIMARY KEY,
                     model VARCHAR ( 50 )  NOT NULL,
                     speed smallint NOT NULL,
                     ram smallint NOT NULL,
@@ -38,9 +38,9 @@ CREATE TABLE pc (
 );
 
 CREATE TABLE printer (
-                         code INT  PRIMARY KEY,
+                         code serial  PRIMARY KEY,
                          model VARCHAR ( 50 )  NOT NULL,
-                         color char(1) NOT NULL,
+                         color char(10) NOT NULL,
                          type VARCHAR (10) NOT NULL,
                          price money  NULL,
                          CONSTRAINT fk_product

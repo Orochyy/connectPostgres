@@ -12,6 +12,68 @@ const (
 	port = 5432
 )
 
+var price = map[int]float32{
+	1: 100,
+	2: 300,
+	3: 500,
+	4: 1000,
+	5: 5000,
+}
+var typep = map[int]string{
+	1: "laser",
+	2: "jet",
+	3: "matrix",
+}
+var color = map[int]bool{
+	1: false,
+	2: true,
+}
+var screen = map[int]float32{
+	1: 100,
+	2: 300,
+	3: 500,
+	4: 1000,
+	5: 5000,
+}
+
+var hd = map[int]float32{
+	1: 100,
+	2: 300,
+	3: 500,
+	4: 1000,
+	5: 5000,
+}
+var ram = map[int]float32{
+	1: 100,
+	2: 300,
+	3: 500,
+	4: 1000,
+	5: 5000,
+}
+var cd = map[int]float32{
+	1: 100,
+	2: 300,
+	3: 500,
+	4: 1000,
+	5: 5000,
+}
+var speed = map[int]float32{
+	1: 100,
+	2: 300,
+	3: 500,
+	4: 1000,
+	5: 5000,
+}
+var maker = map[int]string{
+	1: "yura",
+	2: "vlad",
+}
+var model = map[int]string{
+	1: "laptop",
+	2: "pc",
+	3: "printer",
+}
+
 func main() {
 
 	errEnv := godotenv.Load()
@@ -33,42 +95,20 @@ func main() {
 
 	defer db.Close()
 
-	// insert
-	// hardcoded
-	insertStmt := `insert into "students"("name", "roll") values('John', 1)`
-	_, e := db.Exec(insertStmt)
-	CheckError(e)
-
 	// dynamic
-	insertDynStmt := `insert into "students"("name", "roll") values($1,$2)`
-	_, e = db.Exec(insertDynStmt, "Jane", 2)
+	insertPrinter := `insert into "printer"("model", "color","type","price") values($1,$2,$3,$4)`
+	_, e := db.Exec(insertPrinter, model[1], color[1], typep[1], price[1])
+
 	CheckError(e)
 
-	//// update
-	//updateStmt := `update "Students" set "Name"=$1, "Roll"=$2 where "id"=$3`
-	//_, e = db.Exec(updateStmt, "Mary", 3, 2)
-	//CheckError(e)
-	//
-	//deleteStmt := `delete from "Students" where id=$4`
-	//_, e = db.Exec(deleteStmt, 1)
-	//CheckError(e)
+	insertPc := `insert into "pc"("model", "speed","ram","hd","cd","price") values($1,$2,$3,$4,$5,$6)`
+	_, e = db.Exec(insertPc, model[1], speed[1], ram[1], hd[1], cd[1], price[1])
+	CheckError(e)
 
-	//rows, err := db.Query(`SELECT "id","name", "roll" FROM "students"`)
-	//CheckError(err)
-	//
-	//defer rows.Close()
-	//for rows.Next() {
-	//	var id int
-	//	var name string
-	//	var roll int
-	//
-	//	err = rows.Scan(&id, &name, &roll)
-	//	CheckError(err)
-	//
-	//	fmt.Println(id, name, roll)
-	//}
+	insertLaptop := `insert into "laptop"("model", "speed","ram","hd","price","screen") values($1,$2,$3,$4,$5,$6)`
+	_, e = db.Exec(insertLaptop, model[1], speed[1], ram[1], hd[1], price[1], screen[1])
+	CheckError(e)
 
-	CheckError(err)
 }
 
 func CheckError(err error) {
