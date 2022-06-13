@@ -95,14 +95,8 @@ func main() {
 
 	defer db.Close()
 
-	// dynamic
-	insertPrinter := `insert into "printer"("model", "color","type","price") values($1,$2,$3,$4)`
-	_, e := db.Exec(insertPrinter, model[1], color[1], typep[1], price[1])
-
-	CheckError(e)
-
 	insertPc := `insert into "pc"("model", "speed","ram","hd","cd","price") values($1,$2,$3,$4,$5,$6)`
-	_, e = db.Exec(insertPc, model[1], speed[1], ram[1], hd[1], cd[1], price[1])
+	_, e := db.Exec(insertPc, model[1], speed[1], ram[1], hd[1], cd[1], price[1])
 	CheckError(e)
 
 	insertLaptop := `insert into "laptop"("model", "speed","ram","hd","price","screen") values($1,$2,$3,$4,$5,$6)`

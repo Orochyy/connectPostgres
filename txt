@@ -1,50 +1,36 @@
-CREATE TABLE students (
- id serial PRIMARY KEY,
- name VARCHAR ( 50 )  NOT NULL,
- roll INT NOT NULL
+create table shops
+(
+    id    serial       not null primary key,
+    name  varchar(255) not null,
+    email varchar(255) not null
 );
 
-CREATE TABLE product (
-                         id serial GENERATED ALWAYS AS IDENTITY,
-                         maker VARCHAR(10) ,
-                         model VARCHAR ( 50 )  NOT NULL PRIMARY KEY,
-                         type VARCHAR ( 50 ) NOT NULL
+create table category
+(
+    id   serial       not null primary key,
+    name varchar(255) not null
 );
 
-CREATE TABLE laptop (
-                        code serial  PRIMARY KEY,
-                        model VARCHAR ( 50 )  NOT NULL,
-                        speed smallint NOT NULL,
-                        ram smallint NOT NULL,
-                        hd real  NOT NULL,
-                        price money   NULL,
-                        screen bigint NOT NULL,
-                        CONSTRAINT fk_product
-                            FOREIGN KEY(model)
-                                REFERENCES product(model)
+create table images
+(
+    id  serial       not null primary key,
+    alt varchar(255) not null
 );
 
-CREATE TABLE pc (
-                    code serial  PRIMARY KEY,
-                    model VARCHAR ( 50 )  NOT NULL,
-                    speed smallint NOT NULL,
-                    ram smallint NOT NULL,
-                    hd real  NOT NULL,
-                    cd VARCHAR (10) NOT NULL,
-                    price money  NULL,
-                    CONSTRAINT fk_product
-                        FOREIGN KEY(model)
-                            REFERENCES product(model)
+create table products
+(
+    id          serial       not null primary key,
+    name        varchar(255) not null,
+    price       int          not null,
+    category_id int          not null references category (id),
+    image_id    int          not null references images (id)
 );
 
-CREATE TABLE printer (
-                         code serial  PRIMARY KEY,
-                         model VARCHAR ( 50 )  NOT NULL,
-                         color char(10) NOT NULL,
-                         type VARCHAR (10) NOT NULL,
-                         price money  NULL,
-                         CONSTRAINT fk_product
-                             FOREIGN KEY(model)
-                                 REFERENCES product(model)
+create table orders
+(
+    id         serial not null primary key,
+    product_id int    not null references products (id),
+    shop_id    int    not null references shops (id)
 );
+
 
