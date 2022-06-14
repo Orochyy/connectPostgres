@@ -12,66 +12,33 @@ const (
 	port = 5432
 )
 
-var price = map[int]float32{
-	1: 100,
-	2: 300,
-	3: 500,
-	4: 1000,
-	5: 5000,
-}
-var typep = map[int]string{
-	1: "laser",
-	2: "jet",
-	3: "matrix",
-}
-var color = map[int]bool{
-	1: false,
-	2: true,
-}
-var screen = map[int]float32{
-	1: 100,
-	2: 300,
-	3: 500,
-	4: 1000,
-	5: 5000,
-}
-
-var hd = map[int]float32{
-	1: 100,
-	2: 300,
-	3: 500,
-	4: 1000,
-	5: 5000,
-}
-var ram = map[int]float32{
-	1: 100,
-	2: 300,
-	3: 500,
-	4: 1000,
-	5: 5000,
-}
-var cd = map[int]float32{
-	1: 100,
-	2: 300,
-	3: 500,
-	4: 1000,
-	5: 5000,
-}
-var speed = map[int]float32{
-	1: 100,
-	2: 300,
-	3: 500,
-	4: 1000,
-	5: 5000,
-}
-var maker = map[int]string{
-	1: "yura",
-	2: "vlad",
-}
-var model = map[int]string{
+var categoryName = map[int]string{
 	1: "laptop",
 	2: "pc",
 	3: "printer",
+	4: "potato",
+	5: "apple",
+}
+var shopName = map[int]string{
+	1: "ashan",
+	2: "mcdonalds",
+	3: "jabko",
+	4: "atb",
+	5: "blizenko",
+}
+var imageName = map[int]string{
+	1: "imageName1",
+	2: "imageName2",
+	3: "imageName3",
+	4: "imageName4",
+	5: "imageName5",
+}
+var email = map[int]string{
+	1: "email1@gmail.com",
+	2: "email2@gmail.com",
+	3: "email3@gmail.com",
+	4: "email4@gmail.com",
+	5: "email5@gmail.com",
 }
 
 func main() {
@@ -95,12 +62,16 @@ func main() {
 
 	defer db.Close()
 
-	insertPc := `insert into "pc"("model", "speed","ram","hd","cd","price") values($1,$2,$3,$4,$5,$6)`
-	_, e := db.Exec(insertPc, model[1], speed[1], ram[1], hd[1], cd[1], price[1])
+	insertIntoShops := `insert into "shops"("name","email") values($1,$2)`
+	_, e := db.Exec(insertIntoShops, shopName[5], email[5])
 	CheckError(e)
 
-	insertLaptop := `insert into "laptop"("model", "speed","ram","hd","price","screen") values($1,$2,$3,$4,$5,$6)`
-	_, e = db.Exec(insertLaptop, model[1], speed[1], ram[1], hd[1], price[1], screen[1])
+	insertIntoCategory := `insert into "categories"("name") values($1)`
+	_, e = db.Exec(insertIntoCategory, categoryName[5])
+	CheckError(e)
+
+	insertIntoImage := `insert into "images"("alt") values($1)`
+	_, e = db.Exec(insertIntoImage, imageName[5])
 	CheckError(e)
 
 }
